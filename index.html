@@ -6,20 +6,34 @@
   <title>Happy Mother's Day</title>
 
   <style>
-    body {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
+      width: 100%;
       min-height: 100vh;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #ffb6c1, #ffe4e1, #fff0f5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
       text-align: center;
     }
 
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 90px 0 40px;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
     .card {
-      width: 88%;
+      width: calc(100% - 32px);
       max-width: 430px;
       padding: 24px 18px;
       background: rgba(255, 255, 255, 0.45);
@@ -153,7 +167,7 @@
     }
 
     .heart, .petal, .confetti, .firework {
-      position: absolute;
+      position: fixed;
       z-index: 1;
       pointer-events: none;
     }
@@ -180,12 +194,13 @@
 
     .music-btn {
       position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 5;
-      padding: 10px 14px;
-      font-size: 14px;
+      top: 12px;
+      right: 12px;
+      z-index: 9999;
+      padding: 9px 12px;
+      font-size: 12px;
       display: none;
+      margin: 0;
     }
 
     @keyframes fadeIn {
@@ -299,27 +314,18 @@
   <div class="card hidden" id="page4">
     <img src="mom_photo.jpg" class="photo" alt="Mom and me">
     <h1>I Love You, Mom ❤️</h1>
-
     <p>
       You are one of the biggest reasons I am here today.
       Your love, sacrifices, and prayers shaped me into who I am.
     </p>
-
-    <button onclick="showPage('loveQuestion')">
-      I have a question 😚
-    </button>
+    <button onclick="showPage('loveQuestion')">I have a question 😚</button>
   </div>
 
   <div class="card hidden" id="loveQuestion">
     <h1>Do you love me? 🥺</h1>
 
-    <button class="option-btn" onclick="showPage('loveAmount')">
-      Yes ❤️
-    </button>
-
-    <button class="option-btn" onclick="showPage('loveAmount')">
-      Yes, of course 😘
-    </button>
+    <button class="option-btn" onclick="showPage('loveAmount')">Yes ❤️</button>
+    <button class="option-btn" onclick="showPage('loveAmount')">Yes, of course 😘</button>
 
     <img src="shy_girl.png" class="shy-img" alt="Cute shy girl">
 
@@ -331,13 +337,8 @@
   <div class="card hidden" id="loveAmount">
     <h1>How much do you love me? ❤️</h1>
 
-    <button class="option-btn" onclick="showPage('memoryPage')">
-      So much ❤️
-    </button>
-
-    <button class="option-btn" onclick="showPage('memoryPage')">
-      More than words can say 💕
-    </button>
+    <button class="option-btn" onclick="showPage('memoryPage')">So much ❤️</button>
+    <button class="option-btn" onclick="showPage('memoryPage')">More than words can say 💕</button>
 
     <p class="small-note">
       Also no option other than loving me more 🥺👉👈
@@ -357,18 +358,13 @@
     <p>Thank you for every moment.</p>
     <p>You were always there for me.</p>
 
-    <button onclick="showPage('pageLetterStart')">
-      Open Letter 💌
-    </button>
+    <button onclick="showPage('pageLetterStart')">Open Letter 💌</button>
   </div>
 
   <div class="card hidden" id="pageLetterStart">
     <h1>A Letter For You</h1>
     <p>Click the envelope, Mom ✉️</p>
-
-    <div class="envelope" onclick="showPage('pageLetter')">
-      💌
-    </div>
+    <div class="envelope" onclick="showPage('pageLetter')">💌</div>
   </div>
 
   <div class="card hidden" id="pageLetter">
@@ -390,17 +386,13 @@
       <h2>I love you always 💕</h2>
     </div>
 
-    <button onclick="finalCelebration()">
-      Final Surprise 🎆
-    </button>
+    <button onclick="finalCelebration()">Final Surprise 🎆</button>
   </div>
 
   <div class="card hidden" id="pageFinal">
     <div class="flower">🌹</div>
 
-    <h1 class="final-text">
-      I LOVE YOU MOM ❤️
-    </h1>
+    <h1 class="final-text">I LOVE YOU MOM ❤️</h1>
 
     <p>
       Happy Mother's Day to the most special woman in my life.
@@ -408,9 +400,7 @@
 
     <h2>Forever grateful for you 💖</h2>
 
-    <button onclick="showPage('page1')">
-      Replay Again 🔁
-    </button>
+    <button onclick="showPage('page1')">Replay Again 🔁</button>
   </div>
 
   <script>
@@ -466,7 +456,9 @@
 
       document.getElementById(pageId).classList.remove("hidden");
 
-      for (let i = 0; i < 25; i++) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      for (let i = 0; i < 20; i++) {
         createHeart();
       }
     }
@@ -474,15 +466,15 @@
     function finalCelebration() {
       showPage("pageFinal");
 
-      for (let i = 0; i < 90; i++) {
+      for (let i = 0; i < 80; i++) {
         createConfetti();
       }
 
-      for (let i = 0; i < 16; i++) {
+      for (let i = 0; i < 14; i++) {
         setTimeout(createFirework, i * 250);
       }
 
-      for (let i = 0; i < 70; i++) {
+      for (let i = 0; i < 60; i++) {
         createHeart();
       }
     }
@@ -493,9 +485,9 @@
       heart.className = "heart";
       heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💖";
 
-      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.left = Math.random() * 95 + "vw";
       heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-      heart.style.fontSize = (Math.random() * 22 + 18) + "px";
+      heart.style.fontSize = (Math.random() * 20 + 16) + "px";
 
       document.body.appendChild(heart);
 
@@ -510,9 +502,9 @@
       petal.className = "petal";
       petal.innerHTML = Math.random() > 0.5 ? "🌸" : "🌷";
 
-      petal.style.left = Math.random() * 100 + "vw";
+      petal.style.left = Math.random() * 95 + "vw";
       petal.style.animationDuration = (Math.random() * 4 + 6) + "s";
-      petal.style.fontSize = (Math.random() * 18 + 18) + "px";
+      petal.style.fontSize = (Math.random() * 16 + 16) + "px";
 
       document.body.appendChild(petal);
 
@@ -531,12 +523,12 @@
       confetti.innerHTML =
         shapes[Math.floor(Math.random() * shapes.length)];
 
-      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.left = Math.random() * 95 + "vw";
       confetti.style.animationDuration =
         (Math.random() * 3 + 3) + "s";
 
       confetti.style.fontSize =
-        (Math.random() * 16 + 16) + "px";
+        (Math.random() * 14 + 14) + "px";
 
       document.body.appendChild(confetti);
 
@@ -546,30 +538,23 @@
     }
 
     function createFirework() {
-      const centerX = Math.random() * 80 + 10;
-      const centerY = Math.random() * 50 + 10;
+      const centerX = Math.random() * 75 + 10;
+      const centerY = Math.random() * 45 + 10;
 
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 18; i++) {
         const spark = document.createElement("div");
 
         spark.className = "firework";
         spark.innerHTML = "✨";
 
-        const angle = (Math.PI * 2 * i) / 20;
-        const distance = Math.random() * 80 + 50;
+        const angle = (Math.PI * 2 * i) / 18;
+        const distance = Math.random() * 65 + 40;
 
         spark.style.left = centerX + "vw";
         spark.style.top = centerY + "vh";
 
-        spark.style.setProperty(
-          "--x",
-          Math.cos(angle) * distance + "px"
-        );
-
-        spark.style.setProperty(
-          "--y",
-          Math.sin(angle) * distance + "px"
-        );
+        spark.style.setProperty("--x", Math.cos(angle) * distance + "px");
+        spark.style.setProperty("--y", Math.sin(angle) * distance + "px");
 
         document.body.appendChild(spark);
 
@@ -579,8 +564,8 @@
       }
     }
 
-    setInterval(createHeart, 800);
-    setInterval(createPetal, 1000);
+    setInterval(createHeart, 1000);
+    setInterval(createPetal, 1300);
   </script>
 
 </body>
