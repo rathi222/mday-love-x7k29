@@ -460,26 +460,22 @@
 
       window.scrollTo({ top: 0, behavior: "smooth" });
 
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 6; i++) {
         createHeart();
       }
     }
 
     function finalCelebration() {
-      showPage("pageFinal");
+  showPage("pageFinal");
 
-      for (let i = 0; i < 30; i++) {
-         createConfetti();
-      }
+  for (let i = 0; i < 18; i++) {
+    createConfetti();
+  }
 
-      for (let i = 0; i < 6; i++) {
-         setTimeout(createFirework, i * 350);
-      }
-
-      for (let i = 0; i < 20; i++) {
-         createHeart();
-      }
-    }
+  for (let i = 0; i < 8; i++) {
+    createHeart();
+  }
+}
 
     function createHeart() {
       const heart = document.createElement("div");
@@ -566,8 +562,7 @@
       }
     }
 
-    setInterval(createHeart, 1000);
-    setInterval(createPetal, 1300);
+   
   </script>
 
 </body>
