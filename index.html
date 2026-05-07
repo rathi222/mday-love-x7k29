@@ -466,15 +466,19 @@
       }
     }
 
-    function finalCelebration() {
+   function finalCelebration() {
   showPage("pageFinal");
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 10; i++) {
     createConfetti();
   }
 
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 6; i++) {
     createHeart();
+  }
+
+  for (let i = 0; i < 3; i++) {
+    setTimeout(createFirework, i * 600);
   }
 }
     function createHeart() {
