@@ -24,8 +24,9 @@
     body {
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      padding: 90px 0 40px;
+      align-items: center;
+      padding: 70px 0 40px;
+      min-height: 100vh;
     }
 
     img {
@@ -295,114 +296,6 @@
     <button onclick="startExperience()">Tap to Open ❤️</button>
   </div>
 
-  <div class="card hidden" id="page2">
-    <div class="flower">🌷</div>
-    <h1>Happy Mother's Day ❤️</h1>
-    <p>
-      Thank you for your endless love, care, patience, and sacrifices.
-      You are my biggest blessing.
-    </p>
-    <button onclick="showPage('page3')">Next Surprise 🎁</button>
-  </div>
-
-  <div class="card hidden" id="page3">
-    <h1>A Small Gift For You</h1>
-    <p>Click the gift box, Mom 💝</p>
-    <div class="gift" onclick="showPage('page4')">🎁</div>
-  </div>
-
-  <div class="card hidden" id="page4">
-    <img src="mom_photo.jpg" class="photo" alt="Mom and me">
-    <h1>I Love You, Mom ❤️</h1>
-    <p>
-      You are one of the biggest reasons I am here today.
-      Your love, sacrifices, and prayers shaped me into who I am.
-    </p>
-    <button onclick="showPage('loveQuestion')">I have a question 😚</button>
-  </div>
-
-  <div class="card hidden" id="loveQuestion">
-    <h1>Do you love me? 🥺</h1>
-
-    <button class="option-btn" onclick="showPage('loveAmount')">Yes ❤️</button>
-    <button class="option-btn" onclick="showPage('loveAmount')">Yes, of course 😘</button>
-
-    <img src="shy_girl.png" class="shy-img" alt="Cute shy girl">
-
-    <p class="small-note">
-      Sorry, you do not have option to choose no 😌
-    </p>
-  </div>
-
-  <div class="card hidden" id="loveAmount">
-    <h1>How much do you love me? ❤️</h1>
-
-    <button class="option-btn" onclick="showPage('memoryPage')">So much ❤️</button>
-    <button class="option-btn" onclick="showPage('memoryPage')">More than words can say 💕</button>
-
-    <p class="small-note">
-      Also no option other than loving me more 🥺👉👈
-    </p>
-  </div>
-
-  <div class="card hidden" id="memoryPage">
-    <h1>Beautiful Memories 📸</h1>
-
-    <div class="memory-grid">
-      <img src="memory1.jpg" alt="Memory 1">
-      <img src="memory2.jpg" alt="Memory 2">
-      <img src="memory3.jpg" alt="Memory 3">
-      <img src="memory4.jpg" alt="Memory 4">
-    </div>
-
-    <p>Thank you for every moment.</p>
-    <p>You were always there for me.</p>
-
-    <button onclick="showPage('pageLetterStart')">Open Letter 💌</button>
-  </div>
-
-  <div class="card hidden" id="pageLetterStart">
-    <h1>A Letter For You</h1>
-    <p>Click the envelope, Mom ✉️</p>
-    <div class="envelope" onclick="showPage('pageLetter')">💌</div>
-  </div>
-
-  <div class="card hidden" id="pageLetter">
-    <div class="letter">
-      <h1>Dear Mom ❤️</h1>
-
-      <p>
-        You were always there for me, even during the moments I did not know how much I needed you.
-      </p>
-
-      <p>
-        Thank you for every prayer, every sacrifice, every hug, every advice, and every moment of love.
-      </p>
-
-      <p>
-        I may not say it every day, but I am so blessed to have you as my mother.
-      </p>
-
-      <h2>I love you always 💕</h2>
-    </div>
-
-    <button onclick="finalCelebration()">Final Surprise 🎆</button>
-  </div>
-
-  <div class="card hidden" id="pageFinal">
-    <div class="flower">🌹</div>
-
-    <h1 class="final-text">I LOVE YOU MOM ❤️</h1>
-
-    <p>
-      Happy Mother's Day to the most special woman in my life.
-    </p>
-
-    <h2>Forever grateful for you 💖</h2>
-
-    <button onclick="showPage('page1')">Replay Again 🔁</button>
-  </div>
-
   <script>
     function startExperience() {
       const music = document.getElementById("bgMusic");
@@ -414,13 +307,9 @@
         .then(() => {
           musicBtn.style.display = "block";
           musicBtn.innerHTML = "Pause Music ⏸️";
-        })
-        .catch(() => {
-          musicBtn.style.display = "block";
-          musicBtn.innerHTML = "Play Music 🎵";
         });
 
-      showPage("page2");
+      alert("Continue pasting your remaining pages below this section ❤️");
     }
 
     function toggleMusic() {
@@ -433,49 +322,6 @@
       } else {
         music.pause();
         musicBtn.innerHTML = "Play Music 🎵";
-      }
-    }
-
-    function showPage(pageId) {
-      const pages = [
-        "page1",
-        "page2",
-        "page3",
-        "page4",
-        "loveQuestion",
-        "loveAmount",
-        "memoryPage",
-        "pageLetterStart",
-        "pageLetter",
-        "pageFinal"
-      ];
-
-      pages.forEach(page => {
-        document.getElementById(page).classList.add("hidden");
-      });
-
-      document.getElementById(pageId).classList.remove("hidden");
-
-      window.scrollTo({ top: 0, behavior: "smooth" });
-
-      for (let i = 0; i < 20; i++) {
-        createHeart();
-      }
-    }
-
-    function finalCelebration() {
-      showPage("pageFinal");
-
-      for (let i = 0; i < 80; i++) {
-        createConfetti();
-      }
-
-      for (let i = 0; i < 14; i++) {
-        setTimeout(createFirework, i * 250);
-      }
-
-      for (let i = 0; i < 60; i++) {
-        createHeart();
       }
     }
 
@@ -511,57 +357,6 @@
       setTimeout(() => {
         petal.remove();
       }, 10000);
-    }
-
-    function createConfetti() {
-      const confetti = document.createElement("div");
-
-      confetti.className = "confetti";
-
-      const shapes = ["💗", "💛", "💜", "✨", "🌸", "❤️"];
-
-      confetti.innerHTML =
-        shapes[Math.floor(Math.random() * shapes.length)];
-
-      confetti.style.left = Math.random() * 95 + "vw";
-      confetti.style.animationDuration =
-        (Math.random() * 3 + 3) + "s";
-
-      confetti.style.fontSize =
-        (Math.random() * 14 + 14) + "px";
-
-      document.body.appendChild(confetti);
-
-      setTimeout(() => {
-        confetti.remove();
-      }, 6000);
-    }
-
-    function createFirework() {
-      const centerX = Math.random() * 75 + 10;
-      const centerY = Math.random() * 45 + 10;
-
-      for (let i = 0; i < 18; i++) {
-        const spark = document.createElement("div");
-
-        spark.className = "firework";
-        spark.innerHTML = "✨";
-
-        const angle = (Math.PI * 2 * i) / 18;
-        const distance = Math.random() * 65 + 40;
-
-        spark.style.left = centerX + "vw";
-        spark.style.top = centerY + "vh";
-
-        spark.style.setProperty("--x", Math.cos(angle) * distance + "px");
-        spark.style.setProperty("--y", Math.sin(angle) * distance + "px");
-
-        document.body.appendChild(spark);
-
-        setTimeout(() => {
-          spark.remove();
-        }, 1200);
-      }
     }
 
     setInterval(createHeart, 1000);
