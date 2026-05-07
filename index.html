@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Mother's Day</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffb6c1, #ffe4e1, #fff0f5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .card {
+      width: 88%;
+      max-width: 430px;
+      padding: 24px 18px;
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 28px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.22);
+      backdrop-filter: blur(8px);
+      z-index: 2;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    h1 {
+      font-size: 31px;
+      color: #c2185b;
+      margin-bottom: 10px;
+      animation: glow 2s infinite alternate;
+    }
+
+    h2 {
+      color: #880e4f;
+      font-size: 21px;
+    }
+
+    p {
+      font-size: 17px;
+      color: #4a0033;
+      line-height: 1.5;
+    }
+
+    button {
+      margin-top: 14px;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 30px;
+      background: #e91e63;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(233,30,99,0.4);
+    }
+
+    .option-btn {
+      display: block;
+      width: 85%;
+      margin: 12px auto;
+    }
+
+    .small-note {
+      font-size: 14px;
+      color: #7b1b4d;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    .shy-img {
+      width: 105px;
+      height: 105px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+      animation: shyBounce 2s infinite;
+      margin-top: 8px;
+    }
+
+    .flower {
+      font-size: 46px;
+      animation: bounce 2s infinite;
+    }
+
+    .gift {
+      font-size: 95px;
+      cursor: pointer;
+      animation: shake 1.2s infinite;
+      margin: 20px 0;
+    }
+
+    .photo {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 25px;
+      border: 6px solid white;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      animation: popOut 1.2s ease;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .memory-grid img {
+      width: 100%;
+      height: 135px;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 4px solid white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      animation: floatPhoto 3s ease-in-out infinite;
+    }
+
+    .memory-grid img:nth-child(2) { animation-delay: 0.4s; }
+    .memory-grid img:nth-child(3) { animation-delay: 0.8s; }
+    .memory-grid img:nth-child(4) { animation-delay: 1.2s; }
+
+    .envelope {
+      font-size: 95px;
+      cursor: pointer;
+      animation: bounce 1.8s infinite;
+      margin: 20px 0;
+    }
+
+    .letter {
+      background: #fff8fb;
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: inset 0 0 15px rgba(233,30,99,0.15);
+      animation: openLetter 1.2s ease;
+    }
+
+    .final-text {
+      font-size: 38px;
+      color: #d81b60;
+      animation: bigGlow 1.2s infinite alternate;
+    }
+
+    .heart, .petal, .confetti, .firework {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .heart {
+      animation: floatUp 6s linear infinite;
+    }
+
+    .petal {
+      top: -30px;
+      animation: fall 8s linear infinite;
+    }
+
+    .confetti {
+      top: -20px;
+      font-size: 20px;
+      animation: confettiFall 4s linear forwards;
+    }
+
+    .firework {
+      font-size: 20px;
+      animation: fireworkPop 1.2s ease-out forwards;
+    }
+
+    .music-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 5;
+      padding: 10px 14px;
+      font-size: 14px;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff80ab; }
+      to { text-shadow: 0 0 25px #e91e63; }
+    }
+
+    @keyframes bigGlow {
+      from { text-shadow: 0 0 15px #ff80ab; }
+      to { text-shadow: 0 0 35px #e91e63, 0 0 55px #ff4081; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes shyBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-8px) scale(1.05); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(6deg); }
+      50% { transform: rotate(-6deg); }
+      75% { transform: rotate(4deg); }
+    }
+
+    @keyframes popOut {
+      0% { transform: scale(0.2) rotate(-10deg); opacity: 0; }
+      70% { transform: scale(1.1) rotate(3deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes floatPhoto {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(1.5deg); }
+    }
+
+    @keyframes openLetter {
+      from { transform: scaleY(0.1); opacity: 0; }
+      to { transform: scaleY(1); opacity: 1; }
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.3); opacity: 0; }
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    @keyframes fireworkPop {
+      0% {
+        transform: translate(0, 0) scale(0.2);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1.4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-btn" id="musicBtn" onclick="toggleMusic()">Pause Music ⏸️</button>
+
+  <div class="card" id="page1">
+    <div class="flower">🌸</div>
+    <h1>For My Beautiful Mom</h1>
+    <p>I made something special just for you.</p>
+    <button onclick="startExperience()">Tap to Open ❤️</button>
+  </div>
+
+  <div class="card hidden" id="page2">
+    <div class="flower">🌷</div>
+    <h1>Happy Mother's Day ❤️</h1>
+    <p>
+      Thank you for your endless love, care, patience, and sacrifices.
+      You are my biggest blessing.
+    </p>
+    <button onclick="showPage('page3')">Next Surprise 🎁</button>
+  </div>
+
+  <div class="card hidden" id="page3">
+    <h1>A Small Gift For You</h1>
+    <p>Click the gift box, Mom 💝</p>
+    <div class="gift" onclick="showPage('page4')">🎁</div>
+  </div>
+
+  <div class="card hidden" id="page4">
+    <img src="mom_photo.jpg" class="photo" alt="Mom and me">
+    <h1>I Love You, Mom ❤️</h1>
+
+    <p>
+      You are one of the biggest reasons I am here today.
+      Your love, sacrifices, and prayers shaped me into who I am.
+    </p>
+
+    <button onclick="showPage('loveQuestion')">
+      I have a question 😚
+    </button>
+  </div>
+
+  <div class="card hidden" id="loveQuestion">
+    <h1>Do you love me? 🥺</h1>
+
+    <button class="option-btn" onclick="showPage('loveAmount')">
+      Yes ❤️
+    </button>
+
+    <button class="option-btn" onclick="showPage('loveAmount')">
+      Yes, of course 😘
+    </button>
+
+    <img src="shy_girl.png" class="shy-img" alt="Cute shy girl">
+
+    <p class="small-note">
+      Sorry, you do not have option to choose no 😌
+    </p>
+  </div>
+
+  <div class="card hidden" id="loveAmount">
+    <h1>How much do you love me? ❤️</h1>
+
+    <button class="option-btn" onclick="showPage('memoryPage')">
+      So much ❤️
+    </button>
+
+    <button class="option-btn" onclick="showPage('memoryPage')">
+      More than words can say 💕
+    </button>
+
+    <p class="small-note">
+      Also no option other than loving me more 🥺👉👈
+    </p>
+  </div>
+
+  <div class="card hidden" id="memoryPage">
+    <h1>Beautiful Memories 📸</h1>
+
+    <div class="memory-grid">
+      <img src="memory1.jpg" alt="Memory 1">
+      <img src="memory2.jpg" alt="Memory 2">
+      <img src="memory3.jpg" alt="Memory 3">
+      <img src="memory4.jpg" alt="Memory 4">
+    </div>
+
+    <p>Thank you for every moment.</p>
+    <p>You were always there for me.</p>
+
+    <button onclick="showPage('pageLetterStart')">
+      Open Letter 💌
+    </button>
+  </div>
+
+  <div class="card hidden" id="pageLetterStart">
+    <h1>A Letter For You</h1>
+    <p>Click the envelope, Mom ✉️</p>
+
+    <div class="envelope" onclick="showPage('pageLetter')">
+      💌
+    </div>
+  </div>
+
+  <div class="card hidden" id="pageLetter">
+    <div class="letter">
+      <h1>Dear Mom ❤️</h1>
+
+      <p>
+        You were always there for me, even during the moments I did not know how much I needed you.
+      </p>
+
+      <p>
+        Thank you for every prayer, every sacrifice, every hug, every advice, and every moment of love.
+      </p>
+
+      <p>
+        I may not say it every day, but I am so blessed to have you as my mother.
+      </p>
+
+      <h2>I love you always 💕</h2>
+    </div>
+
+    <button onclick="finalCelebration()">
+      Final Surprise 🎆
+    </button>
+  </div>
+
+  <div class="card hidden" id="pageFinal">
+    <div class="flower">🌹</div>
+
+    <h1 class="final-text">
+      I LOVE YOU MOM ❤️
+    </h1>
+
+    <p>
+      Happy Mother's Day to the most special woman in my life.
+    </p>
+
+    <h2>Forever grateful for you 💖</h2>
+
+    <button onclick="showPage('page1')">
+      Replay Again 🔁
+    </button>
+  </div>
+
+  <script>
+    function startExperience() {
+      const music = document.getElementById("bgMusic");
+      const musicBtn = document.getElementById("musicBtn");
+
+      music.volume = 0.5;
+
+      music.play()
+        .then(() => {
+          musicBtn.style.display = "block";
+          musicBtn.innerHTML = "Pause Music ⏸️";
+        })
+        .catch(() => {
+          musicBtn.style.display = "block";
+          musicBtn.innerHTML = "Play Music 🎵";
+        });
+
+      showPage("page2");
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById("bgMusic");
+      const musicBtn = document.getElementById("musicBtn");
+
+      if (music.paused) {
+        music.play();
+        musicBtn.innerHTML = "Pause Music ⏸️";
+      } else {
+        music.pause();
+        musicBtn.innerHTML = "Play Music 🎵";
+      }
+    }
+
+    function showPage(pageId) {
+      const pages = [
+        "page1",
+        "page2",
+        "page3",
+        "page4",
+        "loveQuestion",
+        "loveAmount",
+        "memoryPage",
+        "pageLetterStart",
+        "pageLetter",
+        "pageFinal"
+      ];
+
+      pages.forEach(page => {
+        document.getElementById(page).classList.add("hidden");
+      });
+
+      document.getElementById(pageId).classList.remove("hidden");
+
+      for (let i = 0; i < 25; i++) {
+        createHeart();
+      }
+    }
+
+    function finalCelebration() {
+      showPage("pageFinal");
+
+      for (let i = 0; i < 90; i++) {
+        createConfetti();
+      }
+
+      for (let i = 0; i < 16; i++) {
+        setTimeout(createFirework, i * 250);
+      }
+
+      for (let i = 0; i < 70; i++) {
+        createHeart();
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+
+      heart.className = "heart";
+      heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💖";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      heart.style.fontSize = (Math.random() * 22 + 18) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+
+    function createPetal() {
+      const petal = document.createElement("div");
+
+      petal.className = "petal";
+      petal.innerHTML = Math.random() > 0.5 ? "🌸" : "🌷";
+
+      petal.style.left = Math.random() * 100 + "vw";
+      petal.style.animationDuration = (Math.random() * 4 + 6) + "s";
+      petal.style.fontSize = (Math.random() * 18 + 18) + "px";
+
+      document.body.appendChild(petal);
+
+      setTimeout(() => {
+        petal.remove();
+      }, 10000);
+    }
+
+    function createConfetti() {
+      const confetti = document.createElement("div");
+
+      confetti.className = "confetti";
+
+      const shapes = ["💗", "💛", "💜", "✨", "🌸", "❤️"];
+
+      confetti.innerHTML =
+        shapes[Math.floor(Math.random() * shapes.length)];
+
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.animationDuration =
+        (Math.random() * 3 + 3) + "s";
+
+      confetti.style.fontSize =
+        (Math.random() * 16 + 16) + "px";
+
+      document.body.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.remove();
+      }, 6000);
+    }
+
+    function createFirework() {
+      const centerX = Math.random() * 80 + 10;
+      const centerY = Math.random() * 50 + 10;
+
+      for (let i = 0; i < 20; i++) {
+        const spark = document.createElement("div");
+
+        spark.className = "firework";
+        spark.innerHTML = "✨";
+
+        const angle = (Math.PI * 2 * i) / 20;
+        const distance = Math.random() * 80 + 50;
+
+        spark.style.left = centerX + "vw";
+        spark.style.top = centerY + "vh";
+
+        spark.style.setProperty(
+          "--x",
+          Math.cos(angle) * distance + "px"
+        );
+
+        spark.style.setProperty(
+          "--y",
+          Math.sin(angle) * distance + "px"
+        );
+
+        document.body.appendChild(spark);
+
+        setTimeout(() => {
+          spark.remove();
+        }, 1200);
+      }
+    }
+
+    setInterval(createHeart, 800);
+    setInterval(createPetal, 1000);
+  </script>
+
+</body>
+</html>
