@@ -92,6 +92,14 @@
       font-style: italic;
     }
 
+    .made-love {
+      margin-top: 18px;
+      font-size: 14px;
+      color: #8a0f4f;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
     .shy-img {
       width: 105px;
       height: 105px;
@@ -162,13 +170,13 @@
     }
 
     .final-text {
-  font-size: 38px;
-  color: #d81b60;
-  animation: none;
-  text-shadow: none;
-}
+      font-size: 38px;
+      color: #d81b60;
+      animation: none;
+      text-shadow: none;
+    }
 
-    .heart, .petal, .confetti, .firework {
+    .heart, .petal, .confetti, .firework, .heart-rain {
       position: fixed;
       z-index: 1;
       pointer-events: none;
@@ -194,6 +202,12 @@
       animation: fireworkPop 1.2s ease-out forwards;
     }
 
+    .heart-rain {
+      top: -40px;
+      font-size: 22px;
+      animation: heartRainFall 5s linear forwards;
+    }
+
     .music-btn {
       position: fixed;
       top: 12px;
@@ -213,11 +227,6 @@
     @keyframes glow {
       from { text-shadow: 0 0 10px #ff80ab; }
       to { text-shadow: 0 0 25px #e91e63; }
-    }
-
-    @keyframes bigGlow {
-      from { text-shadow: 0 0 15px #ff80ab; }
-      to { text-shadow: 0 0 35px #e91e63, 0 0 55px #ff4081; }
     }
 
     @keyframes bounce {
@@ -279,6 +288,20 @@
         opacity: 0;
       }
     }
+
+    @keyframes heartRainFall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(260deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
@@ -295,6 +318,7 @@
     <h1>For My Jaansi Rani</h1>
     <p>I made something special just for you.</p>
     <button onclick="startExperience()">Tap to Open ❤️</button>
+    <div class="made-love">Made with love by your chellum❤️</div>
   </div>
 
   <div class="card hidden" id="page2">
@@ -324,7 +348,7 @@
   </div>
 
   <div class="card hidden" id="loveQuestion">
-  <h1>Question Is.....</h1>
+    <h1>Question Is.....</h1>
     <h1>Do you love me? 🥺</h1>
 
     <button class="option-btn" onclick="showPage('loveAmount')">Yes ❤️</button>
@@ -403,6 +427,8 @@
 
     <h2>Forever grateful for you 💖</h2>
 
+    <div class="made-love">Made with endless love by your child ❤️</div>
+
     <button onclick="showPage('page1')">Replay Again 🔁</button>
   </div>
 
@@ -466,21 +492,26 @@
       }
     }
 
-   function finalCelebration() {
-  showPage("pageFinal");
+    function finalCelebration() {
+      showPage("pageFinal");
 
-  for (let i = 0; i < 10; i++) {
-    createConfetti();
-  }
+      for (let i = 0; i < 10; i++) {
+        createConfetti();
+      }
 
-  for (let i = 0; i < 6; i++) {
-    createHeart();
-  }
+      for (let i = 0; i < 6; i++) {
+        createHeart();
+      }
 
-  for (let i = 0; i < 3; i++) {
-    setTimeout(createFirework, i * 600);
-  }
-}
+      for (let i = 0; i < 3; i++) {
+        setTimeout(createFirework, i * 600);
+      }
+
+      for (let i = 0; i < 15; i++) {
+        setTimeout(createHeartRain, i * 180);
+      }
+    }
+
     function createHeart() {
       const heart = document.createElement("div");
 
@@ -496,6 +527,23 @@
       setTimeout(() => {
         heart.remove();
       }, 7000);
+    }
+
+    function createHeartRain() {
+      const rain = document.createElement("div");
+
+      rain.className = "heart-rain";
+      rain.innerHTML = Math.random() > 0.5 ? "❤️" : "💗";
+
+      rain.style.left = Math.random() * 95 + "vw";
+      rain.style.animationDuration = (Math.random() * 2 + 4) + "s";
+      rain.style.fontSize = (Math.random() * 12 + 18) + "px";
+
+      document.body.appendChild(rain);
+
+      setTimeout(() => {
+        rain.remove();
+      }, 6500);
     }
 
     function createPetal() {
@@ -565,8 +613,6 @@
         }, 1200);
       }
     }
-
-   
   </script>
 
 </body>
